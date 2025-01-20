@@ -1,26 +1,22 @@
-import { RouterProvider } from "react-router-dom";
-import Layout from "./Layout.tsx";
+import { RouterProvider } from 'react-router-dom'
+import Layout from './Layout.tsx'
+import { Analytics } from '@vercel/analytics/react'
 
-import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
-import { ThemeProvider } from "next-themes";
-import router from "./router.tsx";
+import '@radix-ui/themes/styles.css'
+import { Theme } from '@radix-ui/themes'
+import router from './router.tsx'
 
 const App = () => {
-  return (
-    <ThemeProvider attribute="class">
-      <Theme
-        accentColor="indigo"
-        grayColor="gray"
-        panelBackground="solid"
-        scaling="100%"
-      >
-        <Layout>
-          <RouterProvider router={router} />
-        </Layout>
-      </Theme>
-    </ThemeProvider>
-  );
-};
+	return (
+		<>
+			<Theme accentColor="violet" grayColor="gray" panelBackground="solid" scaling="100%">
+				<Layout>
+					<RouterProvider router={router} />
+				</Layout>
+			</Theme>
+			<Analytics />
+		</>
+	)
+}
 
-export default App;
+export default App

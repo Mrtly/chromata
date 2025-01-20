@@ -1,13 +1,25 @@
-### React on Vite with TypeScript - starter template
+## Chromata
 
-set up with React Router,
-
-Vitest & React Testing-Library,
-
-Radix Themes, Tailwind,
-
-handy base configs (TS, Tailwind, ESlint, Prettier)
+**[chromata.vercel.app](https://chromata.vercel.app/)**
 
 <hr/>
 
-enjoy 🪄
+A color palette generator using [thecolorapi](https://www.thecolorapi.com/).
+
+> "Chromata" is Greek for "colors"
+
+<hr/>
+
+##### features
+
+- **Rainbow palette**
+
+  Create a rainbow palette of colors spanning across the color circle.
+
+##### soon
+
+- **Color scheme palette**
+
+  Create color schemes and experiment with various HSL values.
+
+<hr/>
