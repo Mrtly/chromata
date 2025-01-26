@@ -1,5 +1,4 @@
 import { RouterProvider } from 'react-router-dom'
-import Layout from './Layout.tsx'
 import { Analytics } from '@vercel/analytics/react'
 
 import '@radix-ui/themes/styles.css'
@@ -10,9 +9,7 @@ const App = () => {
 	return (
 		<>
 			<Theme accentColor="violet" grayColor="gray" panelBackground="solid" scaling="100%">
-				<Layout>
-					<RouterProvider router={router} />
-				</Layout>
+				<RouterProvider router={router} />
 			</Theme>
 			<Analytics />
 		</>

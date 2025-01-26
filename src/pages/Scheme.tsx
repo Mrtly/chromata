@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button, Grid, Spinner } from '@radix-ui/themes'
 import NumberInput from '@/components/NumberInput'
 import ColorSquarie from '@/components/ColorSquarie'
@@ -20,28 +20,20 @@ interface State {
 }
 
 interface Queries {
+	h: number
 	s: number
 	l: number
 }
 
-const Rainbow: React.FC = () => {
+const Scheme: React.FC = () => {
 	const [state, setState] = useState<State>({
 		allColors: [],
 		uniqueColors: [],
 		currentHsl: '',
 		loading: false,
 	})
-	const [queries, setQueries] = useState<Queries>({ s: 100, l: 30 })
+	const [queries, setQueries] = useState<Queries>({ h: 255, s: 40, l: 60 })
 	const [error, setError] = useState<boolean>(false)
-
-	// Generate rainbow hues (0 to 360° with step of 7°)
-	const rainbowHues = useMemo(() => {
-		const hues: number[] = []
-		for (let i = 0; i <= 360; i += 7) {
-			hues.push(i)
-		}
-		return hues
-	}, [])
 
 	const getColors = useCallback(async () => {
 		setState((prevState) => ({
@@ -49,16 +41,15 @@ const Rainbow: React.FC = () => {
 			loading: true,
 			allColors: [],
 			uniqueColors: [],
+			currentHsl: '',
 		}))
 
-		try {
-			const fetchPromises = rainbowHues.map(async (hue) => {
-				const url = `https://www.thecolorapi.com/id?hsl=${hue},${queries.s}%,${queries.l}%&format=json`
-				const response = await fetch(url)
-				return response.json()
-			})
+		const url = `https://www.thecolorapi.com/scheme?hsl=${queries.h},${queries.s}%,${queries.l}%&format=json&count=500`
 
-			const fetchedColors = await Promise.all(fetchPromises)
+		try {
+			const response = await fetch(url)
+			const data = await response.json()
+			const fetchedColors = data.colors
 
 			const uniqueColors = deduplicateByName(fetchedColors)
 
@@ -66,7 +57,7 @@ const Rainbow: React.FC = () => {
 				...prevState,
 				allColors: fetchedColors,
 				uniqueColors: uniqueColors as Color[],
-				currentHsl: `s: ${queries.s}%, l: ${queries.l}%`,
+				currentHsl: `hsl(${queries.h}, ${queries.s}%, ${queries.l}%)`,
 				loading: false,
 			}))
 		} catch {
@@ -76,7 +67,7 @@ const Rainbow: React.FC = () => {
 				loading: false,
 			}))
 		}
-	}, [queries.s, queries.l])
+	}, [queries])
 
 	useEffect(() => {
 		getColors()
@@ -107,6 +98,19 @@ const Rainbow: React.FC = () => {
 					Create a rainbow palette with saturation & lightness variance
 				</h1>
 				<div className="my-4 flex flex-wrap items-end gap-2">
+					<div>
+						<NumberInput
+							id="hue"
+							value={queries.h}
+							label="Hue"
+							name="hue"
+							type="number"
+							min={0}
+							max={360}
+							disabled={state.loading}
+							onChange={(e) => setQueries((prev) => ({ ...prev, h: +e.target.value }))}
+						/>
+					</div>
 					<div>
 						<NumberInput
 							id="saturation"
@@ -198,4 +202,4 @@ const Rainbow: React.FC = () => {
 	)
 }
 
-export default Rainbow
+export default Scheme
