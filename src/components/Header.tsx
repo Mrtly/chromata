@@ -1,7 +1,7 @@
 import { cn } from '@/utils/cn'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 import { Link } from '@radix-ui/themes'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from '@tanstack/react-router'
 
 const HeaderLink = ({ path, children }: { path: string; children: string }) => {
 	const location = useLocation()
