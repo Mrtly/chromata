@@ -1,10 +1,11 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import Layout from '@/Layout'
+import PageTransition from '@/components/PageTransition'
+// import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+
 import '@radix-ui/themes/styles.css'
 import { Theme } from '@radix-ui/themes'
+import Layout from '@/Layout'
 import { NotFound } from '@/components/NotFound'
-// import { ThemeProvider } from "next-themes"
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -13,26 +14,17 @@ export const Route = createRootRoute({
 	},
 })
 
-// const App = () => {
-// 	return (
-// 		<>
-// 			<Theme accentColor="violet" grayColor="gray" panelBackground="solid" scaling="100%">
-// 				<RouterProvider router={router} />
-// 			</Theme>
-// 			{/* <Analytics /> */}
-// 		</>
-// 	)
-// }
-
 function RootComponent() {
 	return (
-		// <ThemeProvider attribute="class">
-		<Theme accentColor="indigo" grayColor="gray" panelBackground="solid" scaling="100%">
-			<Layout>
-				<Outlet /> {/* this is the new App equivalent */}
-				<TanStackRouterDevtools position="bottom-right" />
-			</Layout>
-		</Theme>
-		// </ThemeProvider>
+		<>
+			<Theme accentColor="indigo" grayColor="gray" panelBackground="solid" scaling="100%">
+				<Layout>
+					<PageTransition>
+						<Outlet /> {/* this is the new App equivalent */}
+					</PageTransition>
+				</Layout>
+			</Theme>
+			{/* <TanStackRouterDevtools position="bottom-right" /> */}
+		</>
 	)
 }
