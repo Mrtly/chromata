@@ -14,7 +14,7 @@ import {
 	getCopyablePaletteObject,
 } from '@/utils/colorHelpers'
 import { addToastToQueue } from '@/components/Toast'
-import { PalettePanel } from '@/components/PalettePanel'
+import { InfoPanel, PalettePanel } from '@/components/Panels'
 
 export const Route = createFileRoute('/rainbow')({
 	component: () => {
@@ -108,9 +108,8 @@ function Rainbow() {
 
 	return (
 		<ErrorBoundary>
-			<div className="flex flex-col lg:flex-row">
-				{/* Inputs */}
-				<PalettePanel
+			<div className="flex flex-col gap-6 lg:flex-row">
+				<InfoPanel
 					heading="rainbow palette"
 					subheading="color palette with saturation & lightness variance"
 				>
@@ -187,14 +186,13 @@ function Rainbow() {
 							copy palette
 						</Button>
 					)}
-				</PalettePanel>
+				</InfoPanel>
 
-				{/* Colors */}
-				<div className="xl:w-2/3 w-full py-8 md:px-16">
+				<PalettePanel>
 					<Suspense fallback={<Spinner size="3" className="mx-auto" />}>
 						<Results uniqueColors={state.uniqueColors} loading={state.loading} error={error} />
 					</Suspense>
-				</div>
+				</PalettePanel>
 			</div>
 		</ErrorBoundary>
 	)

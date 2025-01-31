@@ -15,7 +15,7 @@ import {
 	getCopyablePaletteObject,
 	// getCopyablePaletteObject,
 } from '@/utils/colorHelpers'
-import { PalettePanel } from '@/components/PalettePanel'
+import { InfoPanel, PalettePanel } from '@/components/Panels'
 import { addToastToQueue } from '@/components/Toast'
 
 interface HSLQueries extends HSQueries {
@@ -73,7 +73,7 @@ const Scheme: React.FC = () => {
 	}, [])
 
 	const handleGenerate = () => {
-		getColors()
+		// getColors()
 	}
 
 	useEffect(() => {
@@ -98,9 +98,8 @@ const Scheme: React.FC = () => {
 
 	return (
 		<ErrorBoundary>
-			<div className="flex flex-col lg:flex-row">
-				{/* Inputs */}
-				<PalettePanel heading="scheme palette" subheading="color palette by HSL values">
+			<div className="flex flex-col gap-6 lg:flex-row">
+				<InfoPanel heading="scheme palette" subheading="color palette by HSL values">
 					<div className="my-4 flex flex-wrap items-end gap-2">
 						<div>
 							<NumberInput
@@ -188,14 +187,13 @@ const Scheme: React.FC = () => {
 							copy palette
 						</Button>
 					)}
-				</PalettePanel>
+				</InfoPanel>
 
-				{/* Colors */}
-				<div className="py-8 md:px-16">
+				<PalettePanel>
 					<Suspense fallback={<Spinner size="3" className="mx-auto" />}>
 						<Results uniqueColors={state.uniqueColors} loading={state.loading} error={error} />
 					</Suspense>
-				</div>
+				</PalettePanel>
 			</div>
 		</ErrorBoundary>
 	)

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,9 +8,4 @@
 	background-image: repeating-linear-gradient(white 0px, white 28px, teal 30px);
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-.postit {
-	font-family: 'Indie Flower';
-	border-bottom-right-radius: 60px 10px; /* thats the folding corner */
-	box-shadow: 1px 1px 2px gray;
 }

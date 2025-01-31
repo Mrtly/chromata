@@ -9,8 +9,8 @@ const config: Config = {
 				test: '120px',
 			},
 			fontFamily: {
-				funnel: ['Funnel Sans', 'serif'],
 				open: ['Open Sans', 'serif'],
+				gummy: ['Sour Gummy', 'serif'],
 			},
 			keyframes: {
 				'slide-up': {

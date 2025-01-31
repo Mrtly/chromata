@@ -17,7 +17,7 @@ export const Route = createRootRoute({
 function RootComponent() {
 	return (
 		<>
-			<Theme accentColor="indigo" grayColor="gray" panelBackground="solid" scaling="100%">
+			<Theme accentColor="violet" grayColor="sand" scaling="100%">
 				<Layout>
 					<PageTransition>
 						<Outlet /> {/* this is the new App equivalent */}
