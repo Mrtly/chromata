@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SchemeImport } from './routes/scheme'
 import { Route as RainbowImport } from './routes/rainbow'
+import { Route as PostitsImport } from './routes/postits'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const SchemeRoute = SchemeImport.update({
 const RainbowRoute = RainbowImport.update({
   id: '/rainbow',
   path: '/rainbow',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PostitsRoute = PostitsImport.update({
+  id: '/postits',
+  path: '/postits',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +51,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/postits': {
+      id: '/postits'
+      path: '/postits'
+      fullPath: '/postits'
+      preLoaderRoute: typeof PostitsImport
       parentRoute: typeof rootRoute
     }
     '/rainbow': {
@@ -67,12 +81,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/postits': typeof PostitsRoute
   '/rainbow': typeof RainbowRoute
   '/scheme': typeof SchemeRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/postits': typeof PostitsRoute
   '/rainbow': typeof RainbowRoute
   '/scheme': typeof SchemeRoute
 }
@@ -80,27 +96,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/postits': typeof PostitsRoute
   '/rainbow': typeof RainbowRoute
   '/scheme': typeof SchemeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rainbow' | '/scheme'
+  fullPaths: '/' | '/postits' | '/rainbow' | '/scheme'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rainbow' | '/scheme'
-  id: '__root__' | '/' | '/rainbow' | '/scheme'
+  to: '/' | '/postits' | '/rainbow' | '/scheme'
+  id: '__root__' | '/' | '/postits' | '/rainbow' | '/scheme'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PostitsRoute: typeof PostitsRoute
   RainbowRoute: typeof RainbowRoute
   SchemeRoute: typeof SchemeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PostitsRoute: PostitsRoute,
   RainbowRoute: RainbowRoute,
   SchemeRoute: SchemeRoute,
 }
@@ -116,12 +135,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/postits",
         "/rainbow",
         "/scheme"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/postits": {
+      "filePath": "postits.tsx"
     },
     "/rainbow": {
       "filePath": "rainbow.tsx"

@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notebook {
+	background-image: repeating-linear-gradient(white 0px, white 28px, teal 30px);
+	background-size: cover;
+	background-repeat: no-repeat;
+}

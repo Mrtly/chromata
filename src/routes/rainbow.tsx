@@ -207,7 +207,12 @@ const Results: React.FC<ResultsProps> = ({ uniqueColors, loading, error }) => {
 	}
 
 	return (
-		<Grid columns={{ initial: '4', sm: '6', md: '8', lg: '12' }} gap="4" width="auto">
+		<Grid
+			columns={{ initial: '4', sm: '6', md: '8', lg: '12' }}
+			gap="4"
+			width="70vw"
+			className="mx-auto"
+		>
 			{uniqueColors.map((color) => (
 				<div key={color.name.value}>
 					<ColorSquarie
