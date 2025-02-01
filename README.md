@@ -1,25 +1,29 @@
-## Chromata
+# Chromata
 
-**[chromata.vercel.app](https://chromata.vercel.app/)**
-
-<hr/>
-
-A color palette generator using [thecolorapi](https://www.thecolorapi.com/).
+## **[chromata.vercel.app](https://chromata.vercel.app/)**
 
 > "Chromata" is Greek for "colors"
 
 <hr/>
 
-##### features
+### features
+
+#### Post-it palettes
+
+inspired by the new [Post-it Collections](https://www.post-it.com/3M/en_US/post-it/ideas/color/collections/)
+
+#### Palette generation
+
+using [thecolorapi](https://www.thecolorapi.com/)
 
 - **Rainbow palette**
 
-  Create a rainbow palette of colors spanning across the color circle.
-
-##### soon
+  a rainbow palette of colors spanning across the color circle
 
 - **Color scheme palette**
 
-  Create color schemes and experiment with various HSL values.
+  color schemes from various HSL values
 
 <hr/>
+
+<img width="500" src="./sshot.png" alt="app screenshot"/>

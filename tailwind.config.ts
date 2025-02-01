@@ -18,13 +18,13 @@ const config: Config = {
 					'100%': { transform: 'translateY(0)' },
 				},
 				'slide-out': {
-					'0%': { transform: 'translateX(0)' },
-					'100%': { transform: 'translateX(100%)' },
+					'0%': { transform: 'translateY(0)' },
+					'100%': { transform: 'translateY(100%)' },
 				},
 			},
 			animation: {
 				'slide-bottom-up': 'slide-up 0.1s ease-out',
-				'slide-out-right': 'slide-out 0.2s ease-in',
+				'slide-bottom-out': 'slide-out 0.2s ease-in',
 			},
 		},
 	},

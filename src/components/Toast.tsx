@@ -94,7 +94,7 @@ const Toast = ({ state, ...props }: ToastProps<ToastPropsObjectType>) => {
 		'w-fit mx-auto min-w-[260px] text-black bg-white border-2 border-violet-600 focusVisibleRingStyles',
 		'group my-1 relative flex items-start overflow-hidden rounded-md py-4 px-8 shadow-lg transition-all',
 		!prefersReducedMotion &&
-			'data-[animation=entering]:animate-slide-bottom-up data-[animation=exiting]:animate-slide-out-right',
+			'data-[animation=entering]:animate-slide-bottom-up data-[animation=exiting]:animate-slide-bottom-out',
 	])
 	const dismissButtonStyles = cn(
 		'absolute right-2 top-2 rounded text-gray-600 opacity-0 transition-opacity flex items-center justify-center p-0.5',
