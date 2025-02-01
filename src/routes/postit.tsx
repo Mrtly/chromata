@@ -8,10 +8,10 @@ import { InfoPanel } from '@/components/Panels'
 import { flushSync } from 'react-dom'
 
 export const Route = createFileRoute('/postit')({
-	component: PostIts,
+	component: PostItsPage,
 })
 
-function PostIts() {
+function PostItsPage() {
 	const [currentPalette, setCurrentPalette] = useState(palettes[0])
 	const [, startTransition] = useTransition()
 
@@ -67,7 +67,7 @@ function PostIts() {
 			<div className="w-full min-h-screen bg-white rounded-xl p-4">
 				<div className="flex flex-wrap w-full justify-between px-1 text-gray-500">
 					<div className="flex gap-4 items-center">
-						<h2 className="text-3xl font-gummy">{currentPalette.name}</h2>
+						<div className="text-3xl font-gummy">{currentPalette.name}</div>
 						<Button onClick={handleCopyPalette} variant="outline" className="cursor-pointer">
 							copy palette
 						</Button>
@@ -93,6 +93,8 @@ function PostIts() {
 		</div>
 	)
 }
+
+export { PostItsPage }
 
 const PostIt = ({ color, content }: { color: string; content: ReactNode }) => {
 	const handleCopy: React.MouseEventHandler<HTMLButtonElement> = (e) => {

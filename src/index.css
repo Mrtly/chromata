@@ -4,9 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@view-transition {
-	navigation: auto;
-}
+/* ----- transitions ------ */
 
 /* headings */
 
@@ -16,15 +14,29 @@ h1 {
 
 ::view-transition-old(headings) {
 	animation: scale-out 0.75s ease-in-out;
-	animation: fade-out 0.5s ease-in-out;
+	animation: fade-out 0.45s ease-in-out;
 }
 
 ::view-transition-new(headings) {
 	animation: scale-in 0.75s ease-in-out;
-	animation: fade-in 0.5s ease-in-out;
+	animation: fade-in 0.45s ease-in-out;
 }
 
-/* postits */
+h2 {
+	view-transition-name: headings2;
+}
+
+::view-transition-old(headings2) {
+	animation: scale-out 0.75s ease-in-out;
+	animation: fade-out 0.45s ease-in-out;
+}
+
+::view-transition-new(headings2) {
+	animation: scale-in 0.75s ease-in-out;
+	animation: fade-in 0.45s ease-in-out;
+}
+
+/* Post-its */
 ::view-transition-old(postit-*) {
 	animation: fade-out 0.75s ease-in-out;
 }

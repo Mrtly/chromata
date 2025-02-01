@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
 
-const Home = () => {
+const Homepage = () => {
 	const cardLinkStyles = cn(
 		'w-72 h-44 bg-white shadow-md hover:shadow-lg rounded-xl',
 		'flex items-center justify-center',
@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<ErrorBoundary>
 			<div>
-				<h1 className="sr-only">chromata home page</h1>
+				<h1 className="sr-only">chromata Homepage page</h1>
 				<div className="mt-10 flex gap-10 items-center justify-center flex-wrap">
 					<Link
 						to="/postit"
@@ -44,8 +44,8 @@ const Home = () => {
 	)
 }
 
-export { Home } //export for testing
+export { Homepage } //export for testing
 
 export const Route = createFileRoute('/')({
-	component: Home,
+	component: Homepage,
 })

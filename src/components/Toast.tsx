@@ -12,11 +12,11 @@ import { Cross1Icon } from '@radix-ui/react-icons'
 
 //  reduced motion setting for handling toast animation
 
-let prefersReducedMotion = false
-const query = '(prefers-reduced-motion: reduce)'
-if (typeof window !== 'undefined' && 'matchMedia' in window) {
-	prefersReducedMotion = window?.matchMedia(query).matches
-}
+const prefersReducedMotion = false
+// const query = '(prefers-reduced-motion: reduce)'
+// if (typeof window !== 'undefined' && 'matchMedia' in window) {
+// 	prefersReducedMotion = window?.matchMedia(query).matches
+// }
 
 // LocalToastRegion is a wrapper with local state (toasts queue) that can be accessed from within
 

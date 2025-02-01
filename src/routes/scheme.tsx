@@ -23,7 +23,7 @@ interface HSLQueries extends HSQueries {
 	h: number
 }
 
-const Scheme: React.FC = () => {
+const SchemePage = () => {
 	const [state, setState] = useState<State>({
 		allColors: [],
 		uniqueColors: [],
@@ -209,8 +209,8 @@ const Scheme: React.FC = () => {
 	)
 }
 
-export { Scheme }
+export { SchemePage }
 
 export const Route = createFileRoute('/scheme')({
-	component: Scheme,
+	component: SchemePage,
 })

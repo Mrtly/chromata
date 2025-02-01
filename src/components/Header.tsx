@@ -33,7 +33,7 @@ const Header = () => {
 		<header className="py-2 px-4 md:px-12 w-full flex gap-2 items-center justify-between bg-white rounded-full">
 			<Link
 				to="/"
-				aria-label="Chromata home"
+				aria-label="Chromata Homepage"
 				className="flex items-center gap-2 hover:no-underline"
 				viewTransition={{ types: ['layout-shift'] }}
 			>

@@ -19,11 +19,11 @@ import { ExternalLinkIcon } from '@radix-ui/react-icons'
 
 export const Route = createFileRoute('/rainbow')({
 	component: () => {
-		return <Rainbow />
+		return <RainbowPage />
 	},
 })
 
-function Rainbow() {
+function RainbowPage() {
 	const [state, setState] = useState<State>({
 		allColors: [],
 		uniqueColors: [],
@@ -208,4 +208,4 @@ function Rainbow() {
 	)
 }
 
-export { Rainbow }
+export { RainbowPage }
