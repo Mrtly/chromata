@@ -24,12 +24,12 @@ const ColorSquarie: React.FC<ColorSquarieProps> = ({ colorName, colorRgb, colorH
 	return (
 		//color-square class is used by gsap
 		//eslint-disable-next-line
-		<div className="color-square flex min-w-[36px] flex-col gap-0.5">
+		<div className="color-square flex min-w-[70px] flex-col gap-0.5">
 			<button
 				aria-label={`hex for color ${colorName}`}
 				onClick={handleCopy}
 				style={{ backgroundColor: colorRgb }}
-				className="size-20 rounded-md shadow-md focusVisibleRingStyles cursor-default"
+				className="size-16 rounded-md shadow-md focusVisibleRingStyles cursor-default active:scale-90"
 			/>
 			<div className="font-medium tracking-wide font-funnel break-keep">{colorName}</div>
 			{colorHex && <div className="font-light text-zinc-700">{colorHex}</div>}

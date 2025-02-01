@@ -68,7 +68,7 @@ const ToastRegion = ({ state, ...props }: ToastRegionProps) => {
 			{...regionProps}
 			ref={ref}
 			aria-label="Notifications"
-			className="fixed bottom-2 right-2 z-[100]"
+			className="fixed bottom-2 w-full z-[100]"
 		>
 			{state.visibleToasts.map((toast) => (
 				<Toast key={toast.key} toast={toast} state={state} />
@@ -91,8 +91,8 @@ const Toast = ({ state, ...props }: ToastProps<ToastPropsObjectType>) => {
 	const variant = props.toast.content.variant
 
 	const toastStyle = cn([
-		'text-black bg-white border-2 focusVisibleRingStyles',
-		'group my-1 text-sm relative flex items-start w-full min-w-[260px] overflow-hidden rounded-md py-4 px-8 shadow-lg transition-all',
+		'w-fit mx-auto min-w-[260px] text-black bg-white border-2 border-teal-600 focusVisibleRingStyles',
+		'group my-1 relative flex items-start overflow-hidden rounded-md py-4 px-8 shadow-lg transition-all',
 		!prefersReducedMotion &&
 			'data-[animation=entering]:animate-slide-bottom-up data-[animation=exiting]:animate-slide-out-right',
 	])

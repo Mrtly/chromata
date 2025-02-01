@@ -2,29 +2,24 @@ import React, { useState, useEffect, useCallback, Suspense } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Button, Spinner } from '@radix-ui/themes'
-import NumberInput from '@/components/NumberInput'
+import { NumberInput } from '@/components/NumberInput'
 import { deduplicateByName } from '../utils/dedupe'
 import gsap from 'gsap'
 import ErrorBoundary from '@/components/ErrorBoundary'
-import { Results } from './rainbow'
+import { Results } from '@/components/PaletteResults'
 
-interface Color {
-	name: { value: string }
-	rgb: { value: string }
-	hex: { value: string }
-}
+import {
+	type Color,
+	type State,
+	type HSQueries,
+	getCopyablePaletteObject,
+	// getCopyablePaletteObject,
+} from '@/utils/colorHelpers'
+import { PalettePanel } from '@/components/PalettePanel'
+import { addToastToQueue } from '@/components/Toast'
 
-interface State {
-	allColors: Color[]
-	uniqueColors: Color[]
-	currentHsl: string
-	loading: boolean
-}
-
-interface Queries {
+interface HSLQueries extends HSQueries {
 	h: number
-	s: number
-	l: number
 }
 
 const Scheme: React.FC = () => {
@@ -34,7 +29,7 @@ const Scheme: React.FC = () => {
 		currentHsl: '',
 		loading: false,
 	})
-	const [queries, setQueries] = useState<Queries>({ h: 255, s: 40, l: 60 })
+	const [queries, setQueries] = useState<HSLQueries>({ h: 255, s: 40, l: 60 })
 	const [error, setError] = useState<boolean>(false)
 
 	const getColors = useCallback(async () => {
@@ -83,23 +78,29 @@ const Scheme: React.FC = () => {
 
 	useEffect(() => {
 		if (!state.loading && state.uniqueColors.length > 0) {
-			gsap.set('.color-square', { opacity: 0, y: 50 })
+			gsap.set('.color-square', { opacity: 0, x: -100 })
 			gsap.to('.color-square', {
 				opacity: 1,
-				y: 0,
-				stagger: 0.045,
+				x: 0,
+				stagger: 0.025,
 			})
 		}
 	}, [state.uniqueColors, state.loading])
 
+	const copyablePaletteObject = getCopyablePaletteObject(state.uniqueColors)
+	const handleCopyPalette: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+		e.preventDefault()
+		navigator.clipboard.writeText(JSON.stringify(copyablePaletteObject))
+		addToastToQueue({
+			description: <div>Copied palette to clipboard</div>,
+		})
+	}
+
 	return (
 		<ErrorBoundary>
-			<div>
+			<div className="flex flex-col lg:flex-row">
 				{/* Inputs */}
-				<div className="border w-full md:w-3/5 mx-auto rounded p-5 shadow lg:px-10 lg:py-8 bg-indigo-100 my-4 text-zinc-800">
-					<h1 className="pt-2 text-xl font-semibold">
-						Create a rainbow palette with saturation & lightness variance
-					</h1>
+				<PalettePanel heading="scheme palette" subheading="color palette by HSL values">
 					<div className="my-4 flex flex-wrap items-end gap-2">
 						<div>
 							<NumberInput
@@ -144,39 +145,53 @@ const Scheme: React.FC = () => {
 							size="3"
 							disabled={state.loading}
 							onClick={handleGenerate}
-							className="cursor-pointer"
+							className="cursor-pointer tracking-wider"
 						>
 							Generate
 						</Button>
 					</div>
 
-					<div className="mt-2">
-						Using the <code>/id</code> endpoint, results are calculated using multiple hues across
-						the 360° color circle, and the saturation/lightness values:
-						<code
-							className={`whitespace-nowrap text-lg ${!state.loading && state.currentHsl ? '' : 'invisible'}`}
-						>
-							{' '}
-							{state.currentHsl || <Spinner />}
-						</code>
-					</div>
-					<div className="mt-2">
-						Colors are deduplicated by color name; only one tile per color name is presented.
-						<span>
-							{' '}
-							Unique color names:
+					<div className="mt-2 py-2 px-4 bg-zinc-100 rounded-md">
+						<div className="mt-2">
+							Using the <i>colorapi</i> <code>/scheme</code> endpoint, results are calculated for
+							the HSL value. Showing results for:{' '}
 							<code
-								className={`text-lg ${!state.loading && state.uniqueColors.length ? '' : 'invisible'}`}
+								className={`whitespace-nowrap text-lg ${!state.loading && state.currentHsl ? '' : 'invisible'}`}
 							>
-								{' '}
-								{state.uniqueColors.length || <Spinner />}
+								{state.currentHsl || <Spinner />}
 							</code>
-						</span>
+						</div>
+						<div className="mt-2">
+							Colors are deduplicated by color name; only one tile per color name is presented.
+							<span>
+								{' '}
+								Unique color names:
+								<code
+									className={`text-lg ${!state.loading && state.uniqueColors.length ? '' : 'invisible'}`}
+								>
+									{' '}
+									{state.uniqueColors.length || <Spinner />}
+								</code>
+							</span>
+						</div>
 					</div>
-				</div>
+					{/* //separator */}
+					<div className="h-1 border-t border-zinc-300 my-4" />
+
+					{!state.loading && state.uniqueColors && (
+						<Button
+							size="2"
+							variant="outline"
+							className="cursor-pointer tracking-wider"
+							onClick={handleCopyPalette}
+						>
+							copy palette
+						</Button>
+					)}
+				</PalettePanel>
 
 				{/* Colors */}
-				<div className="py-10 md:px-20">
+				<div className="py-8 md:px-16">
 					<Suspense fallback={<Spinner size="3" className="mx-auto" />}>
 						<Results uniqueColors={state.uniqueColors} loading={state.loading} error={error} />
 					</Suspense>

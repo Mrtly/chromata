@@ -9,3 +9,8 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+.postit {
+	font-family: 'Indie Flower';
+	border-bottom-right-radius: 60px 10px; /* thats the folding corner */
+	box-shadow: 1px 1px 2px gray;
+}
