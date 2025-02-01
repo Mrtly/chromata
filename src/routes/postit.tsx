@@ -1,29 +1,19 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ReactNode, useEffect, useState } from 'react'
-import gsap from 'gsap'
+import { ReactNode, useState, useTransition } from 'react'
 import { addToastToQueue } from '@/components/Toast'
 import { cn } from '@/utils/cn'
 import { Button, Link } from '@radix-ui/themes'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 import { InfoPanel } from '@/components/Panels'
+import { flushSync } from 'react-dom'
 
-export const Route = createFileRoute('/postits')({
+export const Route = createFileRoute('/postit')({
 	component: PostIts,
 })
 
 function PostIts() {
 	const [currentPalette, setCurrentPalette] = useState(palettes[0])
-
-	useEffect(() => {
-		gsap.set('.postit', { opacity: 0, x: -10 })
-		gsap.to('.postit', {
-			opacity: 1,
-			x: 0,
-			duration: 0.2,
-			stagger: 0.2,
-			ease: 'power1.out',
-		})
-	}, [currentPalette])
+	const [, startTransition] = useTransition()
 
 	const handleCopyPalette: React.MouseEventHandler<HTMLButtonElement> = (e) => {
 		e.preventDefault()
@@ -31,11 +21,28 @@ function PostIts() {
 		addToastToQueue({
 			description: (
 				<div className="flex gap-2 items-center">
-					Copied<code className="text-violet-700 font-medium">{currentPalette.name}</code> to
-					clipboard
+					Copied
+					<code className="text-violet-700 font-medium font-gummy text-lg">
+						{currentPalette.name}
+					</code>{' '}
+					to clipboard
 				</div>
 			),
 		})
+	}
+
+	const handlePaletteChange = (newPalette: Palette) => {
+		if (document.startViewTransition) {
+			document.startViewTransition(() => {
+				flushSync(() => {
+					setCurrentPalette(newPalette)
+				})
+			})
+		} else {
+			startTransition(() => {
+				setCurrentPalette(newPalette)
+			})
+		}
 	}
 
 	return (
@@ -50,7 +57,7 @@ function PostIts() {
 						<Palette
 							key={p.name}
 							palette={p}
-							onClick={() => setCurrentPalette(p)}
+							onClick={() => handlePaletteChange(p)}
 							isCurrent={p === currentPalette}
 						/>
 					))}
@@ -60,8 +67,8 @@ function PostIts() {
 			<div className="w-full min-h-screen bg-white rounded-xl p-4">
 				<div className="flex flex-wrap w-full justify-between px-1 text-gray-500">
 					<div className="flex gap-4 items-center">
-						<h2 className="text-2xl font-gummy">{currentPalette.name}</h2>
-						<Button size="1" onClick={handleCopyPalette} variant="outline">
+						<h2 className="text-3xl font-gummy">{currentPalette.name}</h2>
+						<Button onClick={handleCopyPalette} variant="outline" className="cursor-pointer">
 							copy palette
 						</Button>
 					</div>
@@ -79,7 +86,7 @@ function PostIts() {
 				{/* <h3 className="text-2xl font-semibold mt-8 ml-8 text-violet-800">{currentPalette.name}!</h3> */}
 				<div className="mt-6 flex flex-wrap w-full p-4 gap-6">
 					{currentPalette.colors.map((p) => (
-						<PostIt color={p.color} content={p.name} />
+						<PostIt color={p.color} content={p.name} key={`${p.name}`} />
 					))}
 				</div>
 			</div>
@@ -108,6 +115,7 @@ const PostIt = ({ color, content }: { color: string; content: ReactNode }) => {
 				backgroundColor: color ? `${color}` : '#ffff99',
 				borderBottomRightRadius: '60px 10px',
 				boxShadow: '1px 1px 2px gray',
+				viewTransitionName: `postit-${content}`, // Make sure it's unique
 			}}
 			className={cn(
 				'flex justify-center active:scale-95 cursor-default',
@@ -132,8 +140,8 @@ const Palette = ({
 	return (
 		<button
 			onClick={onClick}
-			className={`rounded-md min-w-28 p-2 transition-all duration-200 shadow-md border-2 border-zinc-300 hover:border-gray-400 
-        ${isCurrent && 'ring-4 ring-violet-300 hover:border-gray-300'}`}
+			className={`rounded-md min-w-28 p-2 transition-all duration-200 shadow-md border-2 border-zinc-400 hover:border-gray-500 
+        ${isCurrent && 'ring-4 ring-violet-400 hover:border-gray-400'}`}
 		>
 			<div className="text-sm md:text-base font-semibold tracking-wider text-left text-gray-700">
 				{palette.name}
@@ -142,6 +150,7 @@ const Palette = ({
 			<div className="flex w-full">
 				{palette.colors.map((item) => (
 					<div
+						key={item.color}
 						className="w-full h-8"
 						style={{
 							backgroundColor: item.color,

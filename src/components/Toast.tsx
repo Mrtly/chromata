@@ -90,13 +90,13 @@ const Toast = ({ state, ...props }: ToastProps<ToastPropsObjectType>) => {
 	const { title, description, onAction, actionLabel, shouldCloseOnAction } = props.toast.content
 	const variant = props.toast.content.variant
 
-	const toastStyle = cn([
-		'w-fit mx-auto min-w-[260px] text-black bg-white border-2 border-teal-600 focusVisibleRingStyles',
+	const toastStyles = cn([
+		'w-fit mx-auto min-w-[260px] text-black bg-white border-2 border-violet-600 focusVisibleRingStyles',
 		'group my-1 relative flex items-start overflow-hidden rounded-md py-4 px-8 shadow-lg transition-all',
 		!prefersReducedMotion &&
 			'data-[animation=entering]:animate-slide-bottom-up data-[animation=exiting]:animate-slide-out-right',
 	])
-	const dismissButtonStyle = cn(
+	const dismissButtonStyles = cn(
 		'absolute right-2 top-2 rounded text-gray-600 opacity-0 transition-opacity flex items-center justify-center p-0.5',
 		'focus:opacity-100 focusVisibleRingStyles',
 		'group-hover:opacity-100 hover:border-black hover:border group-focus:opacity-100'
@@ -116,7 +116,7 @@ const Toast = ({ state, ...props }: ToastProps<ToastPropsObjectType>) => {
 			{...toastProps}
 			ref={ref}
 			tabIndex={0}
-			className={toastStyle}
+			className={toastStyles}
 			data-animation={props.toast.animation}
 			data-variant={variant}
 			onAnimationEnd={() => {
@@ -140,7 +140,7 @@ const Toast = ({ state, ...props }: ToastProps<ToastPropsObjectType>) => {
 				<IconButton
 					onClick={() => state.close(props.toast.key)}
 					aria-label="Dismiss"
-					className={dismissButtonStyle}
+					className={dismissButtonStyles}
 				>
 					<Cross1Icon />
 				</IconButton>

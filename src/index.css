@@ -4,8 +4,69 @@
 @tailwind components;
 @tailwind utilities;
 
-.notebook {
-	background-image: repeating-linear-gradient(white 0px, white 28px, teal 30px);
-	background-size: cover;
-	background-repeat: no-repeat;
+@view-transition {
+	navigation: auto;
+}
+
+/* headings */
+
+h1 {
+	view-transition-name: headings;
+}
+
+::view-transition-old(headings) {
+	animation: scale-out 0.75s ease-in-out;
+	animation: fade-out 0.5s ease-in-out;
+}
+
+::view-transition-new(headings) {
+	animation: scale-in 0.75s ease-in-out;
+	animation: fade-in 0.5s ease-in-out;
+}
+
+/* postits */
+::view-transition-old(postit-*) {
+	animation: fade-out 0.75s ease-in-out;
+}
+
+::view-transition-new(postit-*) {
+	animation: fade-in 0.75s ease-in-out;
+}
+
+/* keyframes */
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes scale-in {
+	from {
+		transform: scale(0.8);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+@keyframes scale-out {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0.8);
+	}
 }

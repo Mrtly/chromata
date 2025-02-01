@@ -7,6 +7,9 @@ import './index.css'
 const router = createRouter({
 	routeTree,
 	defaultPreload: 'intent',
+	defaultViewTransition: {
+		types: ['layout-shift', 'style'],
+	},
 })
 
 // Register things for typesafety

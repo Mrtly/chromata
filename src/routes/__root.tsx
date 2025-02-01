@@ -1,5 +1,4 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
-import PageTransition from '@/components/PageTransition'
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import '@radix-ui/themes/styles.css'
@@ -19,9 +18,7 @@ function RootComponent() {
 		<>
 			<Theme accentColor="violet" grayColor="sand" scaling="100%">
 				<Layout>
-					<PageTransition>
-						<Outlet /> {/* this is the new App equivalent */}
-					</PageTransition>
+					<Outlet /> {/* this is the new App equivalent */}
 				</Layout>
 			</Theme>
 			{/* <TanStackRouterDevtools position="bottom-right" /> */}

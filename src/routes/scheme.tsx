@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, Suspense } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
-import { Button, Spinner } from '@radix-ui/themes'
+import { Button, Link, Spinner } from '@radix-ui/themes'
 import { NumberInput } from '@/components/NumberInput'
 import { deduplicateByName } from '../utils/dedupe'
 import gsap from 'gsap'
@@ -17,6 +17,7 @@ import {
 } from '@/utils/colorHelpers'
 import { InfoPanel, PalettePanel } from '@/components/Panels'
 import { addToastToQueue } from '@/components/Toast'
+import { ExternalLinkIcon } from '@radix-ui/react-icons'
 
 interface HSLQueries extends HSQueries {
 	h: number
@@ -73,7 +74,7 @@ const Scheme: React.FC = () => {
 	}, [])
 
 	const handleGenerate = () => {
-		// getColors()
+		getColors()
 	}
 
 	useEffect(() => {
@@ -178,14 +179,23 @@ const Scheme: React.FC = () => {
 					<div className="h-1 border-t border-zinc-300 my-4" />
 
 					{!state.loading && state.uniqueColors && (
-						<Button
-							size="2"
-							variant="outline"
-							className="cursor-pointer tracking-wider"
-							onClick={handleCopyPalette}
-						>
-							copy palette
-						</Button>
+						<div className="flex justify-between">
+							<Button
+								size="2"
+								variant="outline"
+								className="cursor-pointer tracking-wider"
+								onClick={handleCopyPalette}
+							>
+								copy palette
+							</Button>
+							<Link
+								href="https://www.thecolorapi.com/"
+								target="_blank"
+								className="hidden md:flex items-center gap-1 underline text-zinc-700 hover:text-zinc-500"
+							>
+								thecolorapi <ExternalLinkIcon className="size-5" />
+							</Link>
+						</div>
 					)}
 				</InfoPanel>
 
