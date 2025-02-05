@@ -114,7 +114,7 @@ function RainbowPage() {
 					heading="rainbow palette"
 					subheading="color palette with saturation & lightness variance"
 				>
-					<div className="my-4 flex flex-wrap items-end gap-2">
+					<div id="form-panel" className="my-4 flex flex-wrap items-end gap-2">
 						<div>
 							<NumberInput
 								id="saturation"

@@ -101,7 +101,7 @@ const SchemePage = () => {
 		<ErrorBoundary>
 			<div className="flex flex-col gap-6 lg:flex-row">
 				<InfoPanel heading="scheme palette" subheading="color palette by HSL values">
-					<div className="my-4 flex flex-wrap items-end gap-2">
+					<div id="form-panel" className="my-4 flex flex-wrap items-end gap-2">
 						<div>
 							<NumberInput
 								id="hue"

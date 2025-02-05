@@ -6,6 +6,12 @@
 
 <hr/>
 
+this is a learning playground
+
+based on the [react starter kit](https://github.com/Mrtly/react-vite-starter)
+
+utilizing tanstack router, the new View transitions API, gsap & other fun things ✨
+
 ### features
 
 #### Post-it palettes
