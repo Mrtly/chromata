@@ -17,38 +17,38 @@ const Header = () => {
 		isNew?: boolean
 	}) => {
 		const styles = cn(
-			'text-zinc-800 text-lg flex items-center',
-			pathname === path ? 'font-bold' : 'hover:text-zinc-600'
+			'text-slate-600 text-sm lg:text-lg flex items-center',
+			pathname === path ? 'font-bold' : 'hover:text-slate-700'
 		)
 
 		return (
 			<Link className={styles} to={path} viewTransition={{ types: ['layout-shift'] }}>
 				{children}
-				{isNew && <NewBadge className="ml-1" />}
+				{isNew && <NewBadge className="hidden md:block ml-1 text-sm lg:text-base" />}
 			</Link>
 		)
 	}
 
 	return (
-		<header className="py-2 px-4 md:px-12 w-full flex gap-2 items-center justify-between bg-white rounded-full">
+		<header className="py-2 px-4 md:px-12 w-full shadow-md flex gap-2 items-center justify-between bg-white rounded-lg">
 			<Link
 				to="/"
 				aria-label="Chromata Homepage"
 				className="flex items-center gap-2 hover:no-underline"
 				viewTransition={{ types: ['layout-shift'] }}
 			>
-				<div className="size-10 md:size-12 rounded bg-gradient-to-br from-indigo-600 to-teal-500" />
-				<div className="hidden lg:block text-zinc-800 hover:text-zinc-700">
-					<div className="text-2xl font-semibold font-gummy">Chromata</div>
-					<div className="text-zinc-500">means colors!</div>
+				<div className="size-10 md:size-12 rounded bg-gradient-to-br from-violet-600 to-teal-600" />
+				<div className="hidden lg:block  hover:text-slate-700 text-4xl font-gummy text-slate-600">
+					Chromata
 				</div>
 			</Link>
 			{pathname !== '/' && (
-				<div className="flex gap-4 md:gap-6">
+				<div className="flex flex-wrap gap-4 md:gap-6">
 					<HeaderLink path="/rainbow">Rainbow</HeaderLink>
 					<HeaderLink path="/scheme">Scheme</HeaderLink>
-					<HeaderLink isNew path="/postit">
-						PostIt
+					<HeaderLink path="/postit">PostIt</HeaderLink>
+					<HeaderLink isNew path="/contrast">
+						Contrast
 					</HeaderLink>
 				</div>
 			)}

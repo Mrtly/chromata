@@ -16,7 +16,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
 		<div className="inline-block">
 			<label
 				htmlFor={name}
-				className={cn('mr-2 block font-medium', disabled ? 'text-zinc-500' : 'text-zinc-700')}
+				className={cn('mr-2 block font-medium', disabled ? 'text-slate-500' : 'text-slate-700')}
 			>
 				{label}
 			</label>
@@ -24,7 +24,7 @@ const NumberInput: React.FC<NumberInputProps> = ({
 				name={name}
 				type={type}
 				disabled={disabled}
-				className="mr-5 block h-10 w-32 rounded border border-zinc-400 px-2 disabled:bg-gray-200 disabled:text-zinc-500"
+				className="mr-5 block h-10 w-32 rounded border border-slate-400 px-2 disabled:bg-gray-200 disabled:text-slate-500"
 				{...props}
 			/>
 		</div>

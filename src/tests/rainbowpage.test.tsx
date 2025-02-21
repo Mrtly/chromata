@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { expect } from 'vitest'
 import { screen } from '@testing-library/react'
 
-import { RainbowPage } from '../routes/rainbow'
+import { RainbowPage } from '../routes/_pathless.rainbow'
 import { renderWithContext } from './utils'
 
 describe('RainbowPage', () => {

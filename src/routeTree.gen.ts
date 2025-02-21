@@ -11,28 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SchemeImport } from './routes/scheme'
-import { Route as RainbowImport } from './routes/rainbow'
-import { Route as PostitImport } from './routes/postit'
+import { Route as PathlessImport } from './routes/_pathless'
 import { Route as IndexImport } from './routes/index'
+import { Route as PathlessSchemeImport } from './routes/_pathless.scheme'
+import { Route as PathlessRainbowImport } from './routes/_pathless.rainbow'
+import { Route as PathlessPostitImport } from './routes/_pathless.postit'
+import { Route as PathlessContrastImport } from './routes/_pathless.contrast'
 
 // Create/Update Routes
 
-const SchemeRoute = SchemeImport.update({
-  id: '/scheme',
-  path: '/scheme',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const RainbowRoute = RainbowImport.update({
-  id: '/rainbow',
-  path: '/rainbow',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PostitRoute = PostitImport.update({
-  id: '/postit',
-  path: '/postit',
+const PathlessRoute = PathlessImport.update({
+  id: '/_pathless',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -40,6 +29,30 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const PathlessSchemeRoute = PathlessSchemeImport.update({
+  id: '/scheme',
+  path: '/scheme',
+  getParentRoute: () => PathlessRoute,
+} as any)
+
+const PathlessRainbowRoute = PathlessRainbowImport.update({
+  id: '/rainbow',
+  path: '/rainbow',
+  getParentRoute: () => PathlessRoute,
+} as any)
+
+const PathlessPostitRoute = PathlessPostitImport.update({
+  id: '/postit',
+  path: '/postit',
+  getParentRoute: () => PathlessRoute,
+} as any)
+
+const PathlessContrastRoute = PathlessContrastImport.update({
+  id: '/contrast',
+  path: '/contrast',
+  getParentRoute: () => PathlessRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -53,75 +66,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/postit': {
-      id: '/postit'
+    '/_pathless': {
+      id: '/_pathless'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PathlessImport
+      parentRoute: typeof rootRoute
+    }
+    '/_pathless/contrast': {
+      id: '/_pathless/contrast'
+      path: '/contrast'
+      fullPath: '/contrast'
+      preLoaderRoute: typeof PathlessContrastImport
+      parentRoute: typeof PathlessImport
+    }
+    '/_pathless/postit': {
+      id: '/_pathless/postit'
       path: '/postit'
       fullPath: '/postit'
-      preLoaderRoute: typeof PostitImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof PathlessPostitImport
+      parentRoute: typeof PathlessImport
     }
-    '/rainbow': {
-      id: '/rainbow'
+    '/_pathless/rainbow': {
+      id: '/_pathless/rainbow'
       path: '/rainbow'
       fullPath: '/rainbow'
-      preLoaderRoute: typeof RainbowImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof PathlessRainbowImport
+      parentRoute: typeof PathlessImport
     }
-    '/scheme': {
-      id: '/scheme'
+    '/_pathless/scheme': {
+      id: '/_pathless/scheme'
       path: '/scheme'
       fullPath: '/scheme'
-      preLoaderRoute: typeof SchemeImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof PathlessSchemeImport
+      parentRoute: typeof PathlessImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface PathlessRouteChildren {
+  PathlessContrastRoute: typeof PathlessContrastRoute
+  PathlessPostitRoute: typeof PathlessPostitRoute
+  PathlessRainbowRoute: typeof PathlessRainbowRoute
+  PathlessSchemeRoute: typeof PathlessSchemeRoute
+}
+
+const PathlessRouteChildren: PathlessRouteChildren = {
+  PathlessContrastRoute: PathlessContrastRoute,
+  PathlessPostitRoute: PathlessPostitRoute,
+  PathlessRainbowRoute: PathlessRainbowRoute,
+  PathlessSchemeRoute: PathlessSchemeRoute,
+}
+
+const PathlessRouteWithChildren = PathlessRoute._addFileChildren(
+  PathlessRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/postit': typeof PostitRoute
-  '/rainbow': typeof RainbowRoute
-  '/scheme': typeof SchemeRoute
+  '': typeof PathlessRouteWithChildren
+  '/contrast': typeof PathlessContrastRoute
+  '/postit': typeof PathlessPostitRoute
+  '/rainbow': typeof PathlessRainbowRoute
+  '/scheme': typeof PathlessSchemeRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/postit': typeof PostitRoute
-  '/rainbow': typeof RainbowRoute
-  '/scheme': typeof SchemeRoute
+  '': typeof PathlessRouteWithChildren
+  '/contrast': typeof PathlessContrastRoute
+  '/postit': typeof PathlessPostitRoute
+  '/rainbow': typeof PathlessRainbowRoute
+  '/scheme': typeof PathlessSchemeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/postit': typeof PostitRoute
-  '/rainbow': typeof RainbowRoute
-  '/scheme': typeof SchemeRoute
+  '/_pathless': typeof PathlessRouteWithChildren
+  '/_pathless/contrast': typeof PathlessContrastRoute
+  '/_pathless/postit': typeof PathlessPostitRoute
+  '/_pathless/rainbow': typeof PathlessRainbowRoute
+  '/_pathless/scheme': typeof PathlessSchemeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/postit' | '/rainbow' | '/scheme'
+  fullPaths: '/' | '' | '/contrast' | '/postit' | '/rainbow' | '/scheme'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/postit' | '/rainbow' | '/scheme'
-  id: '__root__' | '/' | '/postit' | '/rainbow' | '/scheme'
+  to: '/' | '' | '/contrast' | '/postit' | '/rainbow' | '/scheme'
+  id:
+    | '__root__'
+    | '/'
+    | '/_pathless'
+    | '/_pathless/contrast'
+    | '/_pathless/postit'
+    | '/_pathless/rainbow'
+    | '/_pathless/scheme'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PostitRoute: typeof PostitRoute
-  RainbowRoute: typeof RainbowRoute
-  SchemeRoute: typeof SchemeRoute
+  PathlessRoute: typeof PathlessRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PostitRoute: PostitRoute,
-  RainbowRoute: RainbowRoute,
-  SchemeRoute: SchemeRoute,
+  PathlessRoute: PathlessRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -135,22 +189,36 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/postit",
-        "/rainbow",
-        "/scheme"
+        "/_pathless"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/postit": {
-      "filePath": "postit.tsx"
+    "/_pathless": {
+      "filePath": "_pathless.tsx",
+      "children": [
+        "/_pathless/contrast",
+        "/_pathless/postit",
+        "/_pathless/rainbow",
+        "/_pathless/scheme"
+      ]
     },
-    "/rainbow": {
-      "filePath": "rainbow.tsx"
+    "/_pathless/contrast": {
+      "filePath": "_pathless.contrast.tsx",
+      "parent": "/_pathless"
     },
-    "/scheme": {
-      "filePath": "scheme.tsx"
+    "/_pathless/postit": {
+      "filePath": "_pathless.postit.tsx",
+      "parent": "/_pathless"
+    },
+    "/_pathless/rainbow": {
+      "filePath": "_pathless.rainbow.tsx",
+      "parent": "/_pathless"
+    },
+    "/_pathless/scheme": {
+      "filePath": "_pathless.scheme.tsx",
+      "parent": "/_pathless"
     }
   }
 }

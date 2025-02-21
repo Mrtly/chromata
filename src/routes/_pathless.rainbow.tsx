@@ -17,7 +17,7 @@ import { addToastToQueue } from '@/components/Toast'
 import { InfoPanel, PalettePanel } from '@/components/Panels'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 
-export const Route = createFileRoute('/rainbow')({
+export const Route = createFileRoute('/_pathless/rainbow')({
 	component: () => {
 		return <RainbowPage />
 	},
@@ -89,11 +89,11 @@ function RainbowPage() {
 
 	useEffect(() => {
 		if (!state.loading && state.uniqueColors.length > 0) {
-			gsap.set('.color-square', { opacity: 0, x: -100 })
+			gsap.set('.color-square', { opacity: 0, x: -10 })
 			gsap.to('.color-square', {
 				opacity: 1,
 				x: 0,
-				stagger: 0.025,
+				stagger: 0.05,
 			})
 		}
 	}, [state.uniqueColors, state.loading])
@@ -109,7 +109,10 @@ function RainbowPage() {
 
 	return (
 		<ErrorBoundary>
-			<div className="flex flex-col gap-6 lg:flex-row">
+			<div
+				className="flex flex-col gap-6 lg:flex-row"
+				style={{ viewTransitionName: 'page-transition' }}
+			>
 				<InfoPanel
 					heading="rainbow palette"
 					subheading="color palette with saturation & lightness variance"
@@ -150,7 +153,7 @@ function RainbowPage() {
 							Generate
 						</Button>
 					</div>
-					<div className="mt-2 py-2 px-4 bg-zinc-100 rounded-md">
+					<div className="mt-2 py-2 px-4 bg-slate-100 rounded-md">
 						<div>
 							Using the <i>colorapi</i> <code>/id</code> endpoint, results are calculated using
 							multiple hues across the 360° color circle, and the saturation/lightness values:{' '}
@@ -175,7 +178,7 @@ function RainbowPage() {
 						</div>
 					</div>
 					{/* //separator */}
-					<div className="h-1 border-t border-zinc-300 my-4" />
+					<div className="h-1 border-t border-slate-300 my-4" />
 
 					{!state.loading && state.uniqueColors && (
 						<div className="flex justify-between">
@@ -190,7 +193,7 @@ function RainbowPage() {
 							<Link
 								href="https://www.thecolorapi.com/"
 								target="_blank"
-								className="hidden md:flex items-center gap-1 underline text-zinc-700 hover:text-zinc-500"
+								className="hidden md:flex items-center gap-1 underline text-slate-700 hover:text-slate-500"
 							>
 								thecolorapi <ExternalLinkIcon className="size-5" />
 							</Link>

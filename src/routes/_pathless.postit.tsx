@@ -7,7 +7,7 @@ import { ExternalLinkIcon } from '@radix-ui/react-icons'
 import { InfoPanel } from '@/components/Panels'
 import { flushSync } from 'react-dom'
 
-export const Route = createFileRoute('/postit')({
+export const Route = createFileRoute('/_pathless/postit')({
 	component: PostItsPage,
 })
 
@@ -46,25 +46,26 @@ function PostItsPage() {
 	}
 
 	return (
-		<div className="flex flex-col gap-6 lg:flex-row">
-			<InfoPanel
-				heading="Post-it palettes"
-				// subheading="color palette with saturation & lightness variance"
-			>
-				{/* <div className="size-full lg:max-w-72 rounded-xl shadow-lg bg-white p-2"> */}
-				<div className="mt-4 p-4 flex flex-wrap lg:flex-col gap-4">
-					{palettes.map((p) => (
-						<Palette
-							key={p.name}
-							palette={p}
-							onClick={() => handlePaletteChange(p)}
-							isCurrent={p === currentPalette}
-						/>
-					))}
-					{/* </div> */}
+		<div
+			className="flex flex-col gap-6 lg:flex-row"
+			style={{ viewTransitionName: 'page-transition' }}
+		>
+			<InfoPanel heading="Post-it palettes">
+				<div className="overflow-y-scroll">
+					<div className="mt-4 p-4 flex flex-wrap lg:flex-col gap-4">
+						{palettes.map((p) => (
+							<Palette
+								key={p.name}
+								palette={p}
+								onClick={() => handlePaletteChange(p)}
+								isCurrent={p === currentPalette}
+							/>
+						))}
+					</div>
 				</div>
 			</InfoPanel>
-			<div className="w-full min-h-screen bg-white rounded-xl p-4">
+
+			<div className="size-full shadow-md bg-white rounded-xl p-4">
 				<div className="flex flex-wrap w-full justify-between px-1 text-gray-500">
 					<div className="flex gap-4 items-center">
 						<div className="text-3xl font-gummy">{currentPalette.name}</div>
@@ -84,7 +85,7 @@ function PostItsPage() {
 					</div>
 				</div>
 				{/* <h3 className="text-2xl font-semibold mt-8 ml-8 text-violet-800">{currentPalette.name}!</h3> */}
-				<div className="mt-6 flex flex-wrap w-full p-4 gap-6">
+				<div className="mt-6 flex flex-wrap w-full p-4 gap-6 max-h-[50rem] overflow-y-scroll">
 					{currentPalette.colors.map((p) => (
 						<PostIt color={p.color} content={p.name} key={`${p.name}`} />
 					))}
@@ -121,8 +122,8 @@ const PostIt = ({ color, content }: { color: string; content: ReactNode }) => {
 			}}
 			className={cn(
 				'flex justify-center active:scale-95 cursor-default',
-				'size-40 md:size-48 lg:size-72 pt-10',
-				'font-gummy tracking-widest text-2xl text-blue-800'
+				'size-32 md:size-40 lg:size-60 pt-10',
+				'font-gummy tracking-widest text-base sm:text-xl md:text-2xl text-blue-800'
 			)}
 		>
 			{content}
@@ -142,8 +143,8 @@ const Palette = ({
 	return (
 		<button
 			onClick={onClick}
-			className={`rounded-md min-w-28 p-2 transition-all duration-200 shadow-md border-2 border-zinc-400 hover:border-gray-500 
-        ${isCurrent && 'ring-4 ring-violet-400 hover:border-gray-400'}`}
+			className={`rounded-md min-w-28 p-2 transition-all duration-200 shadow-md  
+        ${isCurrent && 'ring-4 ring-slate-400 hover:border-gray-400'}`}
 		>
 			<div className="text-sm md:text-base font-semibold tracking-wider text-left text-gray-700">
 				{palette.name}
@@ -153,7 +154,7 @@ const Palette = ({
 				{palette.colors.map((item) => (
 					<div
 						key={item.color}
-						className="w-full h-8"
+						className="w-full h-6"
 						style={{
 							backgroundColor: item.color,
 						}}

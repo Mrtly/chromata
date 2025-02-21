@@ -6,37 +6,11 @@
 
 /* ----- transitions ------ */
 
-/* headings */
+/* Page transitions */
+::view-transition-old(page-transition),
 
-h1 {
-	view-transition-name: headings;
-}
+::view-transition-new(page-transition),
 
-h2 {
-	view-transition-name: headings2;
-}
-::view-transition-old(headings),
-::view-transition-old(headings2) {
-	animation: fade-out 0.45s ease-out;
-}
-
-::view-transition-new(headings),
-::view-transition-new(headings2) {
-	animation: fade-in 0.45s ease-in-out;
-}
-
-/* panels */
-#form-panel {
-	view-transition-name: fpanel;
-}
-
-::view-transition-old(fpanel) {
-	animation: fade-out 0.45s ease-out;
-}
-
-::view-transition-new(fpanel) {
-	animation: fade-in 0.45s ease-in-out;
-}
 
 /* Post-its */
 ::view-transition-old(postit-*) {
@@ -48,7 +22,6 @@ h2 {
 }
 
 /* keyframes */
-
 @keyframes fade-in {
 	from {
 		opacity: 0;
@@ -83,4 +56,9 @@ h2 {
 	to {
 		transform: scale(0.8);
 	}
+}
+
+/* panels */
+#form-panel {
+	view-transition-name: fpanel;
 }

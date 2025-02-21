@@ -9,11 +9,10 @@ describe('root page', () => {
 	it('renders the Homepage component', () => {
 		renderWithContext(Homepage)
 
-		const heading = screen.getByRole('heading', { name: 'chromata Homepage page' })
+		const heading = screen.getByRole('heading', { name: 'chromata' })
 
 		expect(heading).toBeInTheDocument()
 		expect(heading).toHaveAccessibleName()
-		expect(heading).toHaveClass('sr-only')
 
 		// screen.debug() //useful, prints out the jsx in the terminal
 	})

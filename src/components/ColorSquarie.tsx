@@ -32,7 +32,7 @@ const ColorSquarie: React.FC<ColorSquarieProps> = ({ colorName, colorRgb, colorH
 				className="size-16 rounded-md shadow-md focusVisibleRingStyles cursor-default active:scale-90"
 			/>
 			<div className="font-medium tracking-wide font-gummy break-keep">{colorName}</div>
-			{colorHex && <div className="font-light text-zinc-700">{colorHex}</div>}
+			{colorHex && <div className="font-light text-slate-700">{colorHex}</div>}
 		</div>
 	)
 }
