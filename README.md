@@ -10,9 +10,13 @@ this is a learning playground
 
 based on the [react starter kit](https://github.com/Mrtly/react-vite-starter)
 
-utilizing tanstack router, the new View transitions API, gsap & other fun things ✨
+utilizing tanstack router, the View transitions API, gsap & all the fun tools ✨
 
 ### features
+
+#### Color contrast checker
+
+using the [webAIM](https://webaim.org/) conrast API
 
 #### Post-it palettes
 
@@ -33,3 +37,4 @@ using [thecolorapi](https://www.thecolorapi.com/)
 <hr/>
 
 <img width="500" src="./sshot.png" alt="app screenshot"/>
+<img width="500" src="./sshot1.png" alt="app screenshot"/>

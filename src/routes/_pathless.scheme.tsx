@@ -79,11 +79,11 @@ const SchemePage = () => {
 
 	useEffect(() => {
 		if (!state.loading && state.uniqueColors.length > 0) {
-			gsap.set('.color-square', { opacity: 0, x: -100 })
+			gsap.set('.color-square', { opacity: 0, x: -10 })
 			gsap.to('.color-square', {
 				opacity: 1,
 				x: 0,
-				stagger: 0.025,
+				stagger: 0.05,
 			})
 		}
 	}, [state.uniqueColors, state.loading])
@@ -99,7 +99,10 @@ const SchemePage = () => {
 
 	return (
 		<ErrorBoundary>
-			<div className="flex flex-col gap-6 lg:flex-row">
+			<div
+				className="flex flex-col gap-6 lg:flex-row"
+				style={{ viewTransitionName: 'page-transition' }}
+			>
 				<InfoPanel heading="scheme palette" subheading="color palette by HSL values">
 					<div id="form-panel" className="my-4 flex flex-wrap items-end gap-2">
 						<div>
@@ -151,7 +154,7 @@ const SchemePage = () => {
 						</Button>
 					</div>
 
-					<div className="mt-2 py-2 px-4 bg-zinc-100 rounded-md">
+					<div className="mt-2 py-2 px-4 bg-slate-100 rounded-md">
 						<div className="mt-2">
 							Using the <i>colorapi</i> <code>/scheme</code> endpoint, results are calculated for
 							the HSL value. Showing results for:{' '}
@@ -176,7 +179,7 @@ const SchemePage = () => {
 						</div>
 					</div>
 					{/* //separator */}
-					<div className="h-1 border-t border-zinc-300 my-4" />
+					<div className="h-1 border-t border-slate-300 my-4" />
 
 					{!state.loading && state.uniqueColors && (
 						<div className="flex justify-between">
@@ -191,7 +194,7 @@ const SchemePage = () => {
 							<Link
 								href="https://www.thecolorapi.com/"
 								target="_blank"
-								className="hidden md:flex items-center gap-1 underline text-zinc-700 hover:text-zinc-500"
+								className="hidden md:flex items-center gap-1 underline text-slate-700 hover:text-slate-500"
 							>
 								thecolorapi <ExternalLinkIcon className="size-5" />
 							</Link>
@@ -211,6 +214,6 @@ const SchemePage = () => {
 
 export { SchemePage }
 
-export const Route = createFileRoute('/scheme')({
+export const Route = createFileRoute('/_pathless/scheme')({
 	component: SchemePage,
 })

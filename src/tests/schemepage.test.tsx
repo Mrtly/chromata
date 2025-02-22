@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { expect } from 'vitest'
 import { screen } from '@testing-library/react'
 
-import { SchemePage } from '../routes/scheme'
+import { SchemePage } from '../routes/_pathless.scheme'
 import { renderWithContext } from './utils'
 
 describe('SchemePage', () => {

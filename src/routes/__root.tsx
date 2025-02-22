@@ -3,7 +3,6 @@ import { Outlet, createRootRoute } from '@tanstack/react-router'
 
 import '@radix-ui/themes/styles.css'
 import { Theme } from '@radix-ui/themes'
-import Layout from '@/Layout'
 import { NotFound } from '@/components/NotFound'
 
 export const Route = createRootRoute({
@@ -17,9 +16,7 @@ function RootComponent() {
 	return (
 		<>
 			<Theme accentColor="violet" grayColor="sand" scaling="100%">
-				<Layout>
-					<Outlet /> {/* this is the new App equivalent */}
-				</Layout>
+				<Outlet /> {/* this is the new App equivalent */}
 			</Theme>
 			{/* <TanStackRouterDevtools position="bottom-right" /> */}
 		</>
