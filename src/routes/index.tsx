@@ -1,4 +1,5 @@
 import ErrorBoundary from '@/components/ErrorBoundary'
+import VoronoiHero from '@/components/VoronoiHero'
 import { cn } from '@/utils/cn'
 
 import { createFileRoute } from '@tanstack/react-router'
@@ -18,7 +19,6 @@ const Homepage = () => {
 		'flex items-center gap-2 transition-colors duration-300'
 	)
 
-	// Different decorative shapes with unique gradients
 	const circleShape = cn(
 		'absolute -right-12 -bottom-12 size-40 rounded-full',
 		'bg-gradient-to-br from-pink-200/40 to-purple-300/40',
@@ -45,18 +45,17 @@ const Homepage = () => {
 		'[clip-path:polygon(50%_0%,0%_100%,100%_100%)]'
 	)
 
-	// Arrow style
 	const arrowStyles =
 		'text-violet-500 group-hover:text-violet-600 group-hover:translate-x-1 transition-all duration-300'
 
 	return (
 		<ErrorBoundary>
-			<div className="min-h-screen flex flex-col items-center gap-16 p-10 md:py-10 md:px-20 bg-slate-100 font-open">
-				<div className="lg:w-2/3 text-center py-16 bg-gradient-to-b from-violet-100 to-white rounded-xl">
+			<div className="min-h-screen flex flex-col items-center gap-12 p-10 md:py-10 md:px-20 bg-slate-100 font-open">
+				<VoronoiHero />
+				<div className="lg:w-2/3 text-center">
 					<h1 className="text-5xl font-gummy text-slate-700 mb-4">chromata</h1>
 					<p className="text-lg max-w-2xl mx-auto px-4">
-						A fun toolkit for color exploration and accessibility testing. Create, test, & perfect
-						your color palettes.
+						A fun toolkit for color exploration and accessibility testing.
 					</p>
 				</div>
 

@@ -121,9 +121,9 @@ const ContrastPage = () => {
 						<Link
 							href="https://webaim.org/resources/contrastchecker"
 							target="_blank"
-							className="hidden md:flex items-center gap-1 underline text-slate-700 hover:text-slate-500"
+							className="hidden md:flex max-w-32 items-center gap-1 underline text-slate-700 hover:text-slate-500"
 						>
-							webAIM contrast API <ExternalLinkIcon className="size-5" />
+							webAIM <ExternalLinkIcon className="size-5" />
 						</Link>
 					</div>
 				</InfoPanel>
